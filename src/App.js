@@ -10,7 +10,7 @@ class App extends Component {
     data: []
     };
 }
-componentDidMount() {
+async componentDidMount() {
   let request1 ="http://www.anapioficeandfire.com/api/characters/16";
   let request2 ="http://www.anapioficeandfire.com/api/houses/378";
   let request3 ="http://www.anapioficeandfire.com/api/houses/229";
@@ -27,7 +27,7 @@ componentDidMount() {
   let promise6 = axios.get(request6);
   let promise7 = axios.get(request7);
 
-  axios
+  await Promise
     .all([promise1, promise2, promise3, promise4, promise5, promise6, promise7])
     .then(axios.spread((...response) => {
       let answers =[];
@@ -37,11 +37,26 @@ componentDidMount() {
       answers.push(response[3].data.seats[1]);
       answers.push(response[4].data.aliases[2]);
       answers.push(response[5].data.words);
-      answers.push(response[6].data.books);
-     
+      let books = response[6].data.povBooks;
+      let booksresult = books.map(b=>{
+        return axios.get(b);
+      });
+      console.log(booksresult);
+      Promise
+        .all(booksresult)
+        .then(axios.spread((...res)=>{
+          let ans =[];
+          ans.push(res[0].data.name);
+          ans.push(res[1].data.name);
+          ans.push(res[2].data.name);
+          answers.push(ans);
+          console.log(ans);
+          this.setState({data: answers});
+          console.log(answers);
+        }));
       
-      this.setState({data: answers});
-      console.log(answers);
+      //this.setState({data: answers});
+      //console.log(answers);
     }));
       
       
@@ -74,7 +89,8 @@ render() {
     <h1>What's the name of the founder of House Stark?</h1>
     {this.state.data[5]}
     <h1>What are the titles of Catelyn Stark's three POV books?</h1>
-    {this.state.data[6]}
+    {this.state.data[6]}<br />
+    
     </div>
   )
 }
