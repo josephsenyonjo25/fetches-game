@@ -63,6 +63,18 @@ render() {
     <div>
     <h1>Where was Margaery Tyrell born?</h1>
     {this.state.data[0]}
+    <h1>What region is House Targaryen in?</h1>
+    {this.state.data[1]}
+    <h1>What's the coat of arms of House Lannister?</h1>
+    {this.state.data[2]}
+    <h1>What is the second seat of House Baratheon?</h1>
+    {this.state.data[3]}
+    <h1>What is Robert Baratheon's second alias?</h1>
+    {this.state.data[4]}
+    <h1>What's the name of the founder of House Stark?</h1>
+    {this.state.data[5]}
+    <h1>What are the titles of Catelyn Stark's three POV books?</h1>
+    {this.state.data[6]}
     </div>
   )
 }
