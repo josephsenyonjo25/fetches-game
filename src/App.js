@@ -45,12 +45,12 @@ async componentDidMount() {
       Promise
         .all(booksresult)
         .then(axios.spread((...res)=>{
-          let ans =[];
-          ans.push(res[0].data.name);
-          ans.push(res[1].data.name);
-          ans.push(res[2].data.name);
-          answers.push(ans);
-          console.log(ans);
+         // let ans =[];
+          answers.push(res[0].data.name);
+          answers.push(res[1].data.name);
+          answers.push(res[2].data.name);
+          //answers.push(ans);
+          //console.log(ans);
           this.setState({data: answers});
           console.log(answers);
         }));
@@ -90,6 +90,8 @@ render() {
     {this.state.data[5]}
     <h1>What are the titles of Catelyn Stark's three POV books?</h1>
     {this.state.data[6]}<br />
+    {this.state.data[7]}<br />
+    {this.state.data[8]}<br />
     
     </div>
   )
